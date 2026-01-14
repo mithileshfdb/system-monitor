@@ -1,0 +1,9 @@
+/var/log/system-monitor/*.csv
+/var/log/system-monitor/*.json {
+    daily
+    rotate 14
+    compress
+    missingok
+    notifempty
+    create 0640 root root
+}
