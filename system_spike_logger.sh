@@ -10,8 +10,8 @@ TOP_N=5
 
 mkdir -p "$LOG_DIR"
 
-TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
-FILE_TS=$(date +"%Y%m%d_%H%M%S")
+TIMESTAMP=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S")
+FILE_TS=$(TZ="Asia/Kolkata" date +"%Y%m%d_%H%M%S")
 HOSTNAME=$(hostname)
 
 CSV_LOG="$LOG_DIR/spikes_${HOSTNAME}_${FILE_TS}.csv"
