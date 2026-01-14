@@ -25,7 +25,7 @@ MEM_USED=$(free | awk '/Mem:/ {printf "%.0f", $3/$2 * 100}')
 
 # ---------- Check Threshold ----------
 # ---------- Less Then Check -----------
-if [[ $CPU_USED_INT -lt $CPU_THRESHOLD || $MEM_USED -lt $MEM_THRESHOLD ]]; then
+if [[ $CPU_USED_INT -gt $CPU_THRESHOLD || $MEM_USED -gt $MEM_THRESHOLD ]]; then
   exit 0
 fi
 
