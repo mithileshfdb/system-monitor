@@ -90,17 +90,17 @@ find "$LOG_DIR" -type f -mtime +$LOG_RETENTION_DAYS -name "spikes_*" -delete
 
 
 # ---------- EMAIL ALERT ----------
-MAIL_SUBJECT="🚨 System Alert: High CPU/Memory on $HOSTNAME"
-MAIL_BODY="
-Alert triggered on $HOSTNAME
+# MAIL_SUBJECT="🚨 System Alert: High CPU/Memory on $HOSTNAME"
+# MAIL_BODY="
+# Alert triggered on $HOSTNAME
 
-Time       : $TIMESTAMP
-CPU Usage  : $CPU_USED %
-Memory     : $MEM_USED %
+# Time       : $TIMESTAMP
+# CPU Usage  : $CPU_USED %
+# Memory     : $MEM_USED %
 
-Log Files:
-- $CSV_LOG
-- $JSON_LOG
-"
+# Log Files:
+# - $CSV_LOG
+# - $JSON_LOG
+# "
 
-echo "$MAIL_BODY" | mail -s "$MAIL_SUBJECT" "$EMAIL_TO"
+# echo "$MAIL_BODY" | mail -s "$MAIL_SUBJECT" "$EMAIL_TO"
