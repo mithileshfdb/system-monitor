@@ -6,6 +6,11 @@ LOG_DIR="/var/log/system-monitor"
 CPU_THRESHOLD=80   # %
 MEM_THRESHOLD=80   # %
 TOP_N=5
+
+EMAIL_TO="dev@vesuretech.com"
+S3_BUCKET="s3://gab-bins-images"
+S3_PATH="$S3_BUCKET/system-monitor/$HOSTNAME"
+LOG_RETENTION_DAYS=7   # Auto-delete local logs older than X days
 # =========================================
 
 mkdir -p "$LOG_DIR"
@@ -74,3 +79,25 @@ done
 
 # ---------- JSON End ----------
 echo "]" >> "$JSON_LOG"
+
+
+# ---------- S3 UPLOAD ----------
+aws s3 cp "$CSV_LOG" "$S3_PATH/$HOSTNAME/"
+aws s3 cp "$JSON_LOG" "$S3_PATH/$HOSTNAME/"
+
+
+# ---------- EMAIL ALERT ----------
+MAIL_SUBJECT="🚨 System Alert: High CPU/Memory on $HOSTNAME"
+MAIL_BODY="
+Alert triggered on $HOSTNAME
+
+Time       : $TIMESTAMP
+CPU Usage  : $CPU_USED %
+Memory     : $MEM_USED %
+
+Log Files:
+- $CSV_LOG
+- $JSON_LOG
+"
+
+echo "$MAIL_BODY" | mail -s "$MAIL_SUBJECT" "$EMAIL_TO"
