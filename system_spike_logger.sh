@@ -85,6 +85,9 @@ echo "]" >> "$JSON_LOG"
 aws s3 cp "$CSV_LOG" "$S3_PATH/$HOSTNAME/"
 aws s3 cp "$JSON_LOG" "$S3_PATH/$HOSTNAME/"
 
+# ---------- AUTO CLEANUP OLD LOGS ----------
+find "$LOG_DIR" -type f -mtime +$LOG_RETENTION_DAYS -name "spikes_*" -delete
+
 
 # ---------- EMAIL ALERT ----------
 MAIL_SUBJECT="🚨 System Alert: High CPU/Memory on $HOSTNAME"
