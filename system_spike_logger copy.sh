@@ -15,7 +15,7 @@ TEST_MODE=${1:-false}
 
 mkdir -p "$LOG_DIR"
 
-TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
+TIMESTAMP=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S")
 HOSTNAME=$(hostname)
 
 if [ "$TEST_MODE" = "test" ]; then

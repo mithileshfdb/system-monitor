@@ -9,7 +9,7 @@ TOP_N=5
 
 mkdir -p "$LOG_DIR"
 
-TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
+TIMESTAMP=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S")
 HOSTNAME=$(hostname)
 
 # CPU & Memory summary
