@@ -30,7 +30,7 @@ else
   done
 fi
 
-if [ "${CPU_INT:-99}" -ge $CPU_THRESHOLD ] || [ "${MEM_INT:-99}" -ge $MEM_THRESHOLD ]; then
+if [ "${CPU_INT:-5}" -ge $CPU_THRESHOLD ] || [ "${MEM_INT:-5}" -ge $MEM_THRESHOLD ]; then
   if [ ! -f "$CSV_LOG" ]; then
     echo "timestamp,hostname,pid,process,cpu_percent,mem_percent" >> "$CSV_LOG"
   fi
