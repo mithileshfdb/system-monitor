@@ -24,3 +24,15 @@ sudo /usr/local/bin/system_spike_logger.sh test
 ```bash
 sudo cp system-monitor.logrotate /etc/logrotate.d/system-monitor
 ```
+
+## Expected result ---> Files created:
+```bash
+/var/log/system-monitor/spikes.csv
+/var/log/system-monitor/spikes.json
+```
+
+## CSV example:
+```csv
+timestamp,hostname,pid,process,cpu_percent,mem_percent
+2026-01-14 10:25:01,ubuntu,9999,test-process,99.9,88.8
+```
