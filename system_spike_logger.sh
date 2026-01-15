@@ -3,8 +3,8 @@
 # ================= CONFIG =================
 LOG_DIR="/var/log/system-monitor"
 
-CPU_THRESHOLD=70   # %
-MEM_THRESHOLD=00   # %
+CPU_THRESHOLD=75   # %
+MEM_THRESHOLD=75   # %
 TOP_N=5
 
 EMAIL_TO="dev@vesuretech.com"
