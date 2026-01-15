@@ -11,6 +11,9 @@ EMAIL_TO="dev@vesuretech.com"
 S3_BUCKET="s3://gab-bins-images"
 S3_PATH="$S3_BUCKET/system-monitor/$HOSTNAME"
 LOG_RETENTION_DAYS=7   # Auto-delete local logs older than X days
+
+S3_BUCKET_URL="https://gab-bins-images.s3.ap-south-1.amazonaws.com/system-monitor"
+
 # =========================================
 
 mkdir -p "$LOG_DIR"
@@ -84,6 +87,12 @@ echo "]" >> "$JSON_LOG"
 # ---------- S3 UPLOAD ----------
 aws s3 cp "$CSV_LOG" "$S3_PATH/$HOSTNAME/" --acl public-read
 aws s3 cp "$JSON_LOG" "$S3_PATH/$HOSTNAME/" --acl public-read
+
+S3_CSV_URL="$S3_BUCKET_URL/$HOSTNAME/$(basename "$CSV_LOG")"
+S3_JSON_URL="$S3_BUCKET_URL/$HOSTNAME/$(basename "$JSON_LOG")"
+
+echo "CSV Log URL: $S3_CSV_URL"
+echo "JSON Log URL: $S3_JSON_URL"
 
 # ---------- AUTO CLEANUP OLD LOGS ----------
 find "$LOG_DIR" -type f -mtime +$LOG_RETENTION_DAYS -name "spikes_*" -delete
