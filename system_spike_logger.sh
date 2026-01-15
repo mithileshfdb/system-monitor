@@ -25,6 +25,8 @@ TIMESTAMP=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S")
 FILE_TS=$(TZ="Asia/Kolkata" date +"%Y%m%d_%H%M%S")
 HOSTNAME=$(hostname)
 
+LOG_PATH="$LOG_DIR/"
+
 CSV_LOG="$LOG_DIR/spikes_${HOSTNAME}_${FILE_TS}.csv"
 JSON_LOG="$LOG_DIR/spikes_${HOSTNAME}_${FILE_TS}.json"
 
@@ -103,7 +105,7 @@ echo "]" >> "$JSON_LOG"
 
 
 # Upload spike files with public read access
-aws s3 cp . "$S3_BUCKET_PATH" \
+aws s3 cp "$LOG_PATH" "$S3_BUCKET_PATH" \
   --recursive \
   --exclude "*" \
   --include "${PREFIX}*" \
