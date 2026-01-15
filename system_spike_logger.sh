@@ -85,8 +85,12 @@ echo "]" >> "$JSON_LOG"
 
 
 # ---------- S3 UPLOAD ----------
-aws s3 cp "$CSV_LOG" "$S3_PATH/$HOSTNAME/" --acl public-read
-aws s3 cp "$JSON_LOG" "$S3_PATH/$HOSTNAME/" --acl public-read
+# aws s3 cp "$CSV_LOG" "$S3_PATH/$HOSTNAME/" --acl public-read
+# aws s3 cp "$JSON_LOG" "$S3_PATH/$HOSTNAME/" --acl public-read
+
+
+aws s3 cp "$CSV_LOG" "$S3_PATH/" --acl public-read
+aws s3 cp "$JSON_LOG" "$S3_PATH/" --acl public-read
 
 S3_CSV_URL="$S3_BUCKET_URL/$HOSTNAME/$(basename "$CSV_LOG")"
 S3_JSON_URL="$S3_BUCKET_URL/$HOSTNAME/$(basename "$JSON_LOG")"
