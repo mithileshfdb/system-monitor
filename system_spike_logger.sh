@@ -14,6 +14,9 @@ LOG_RETENTION_DAYS=7   # Auto-delete local logs older than X days
 
 S3_BUCKET_URL="https://gab-bins-images.s3.ap-south-1.amazonaws.com/system-monitor"
 
+PREFIX="spikes"
+S3_BUCKET_PATH="s3://gab-bins-images/system-monitor/$(hostname)/"
+
 # =========================================
 
 mkdir -p "$LOG_DIR"
@@ -89,8 +92,31 @@ echo "]" >> "$JSON_LOG"
 # aws s3 cp "$JSON_LOG" "$S3_PATH/$HOSTNAME/" --acl public-read
 
 
-aws s3 cp "$CSV_LOG" "$S3_PATH/" --acl public-read
-aws s3 cp "$JSON_LOG" "$S3_PATH/" --acl public-read
+# aws s3 cp "$CSV_LOG" "$S3_PATH/" --acl public-read
+# aws s3 cp "$JSON_LOG" "$S3_PATH/" --acl public-read
+
+# S3_CSV_URL="$S3_BUCKET_URL/$HOSTNAME/$(basename "$CSV_LOG")"
+# S3_JSON_URL="$S3_BUCKET_URL/$HOSTNAME/$(basename "$JSON_LOG")"
+
+# echo "CSV Log URL: $S3_CSV_URL"
+# echo "JSON Log URL: $S3_JSON_URL"
+
+
+# Upload spike files with public read access
+aws s3 cp . "$S3_BUCKET_PATH" \
+  --recursive \
+  --exclude "*" \
+  --include "${PREFIX}*" \
+  --acl public-read
+
+# Verify upload before cleanup
+if aws s3 ls "$S3_BUCKET_PATH" | grep -q "${PREFIX}"; then
+  echo "Files verified in S3. Cleaning up local files..."
+  rm -f ${PREFIX}*.csv ${PREFIX}*.json
+else
+  echo "Verification failed. Cleanup skipped."
+fi
+
 
 S3_CSV_URL="$S3_BUCKET_URL/$HOSTNAME/$(basename "$CSV_LOG")"
 S3_JSON_URL="$S3_BUCKET_URL/$HOSTNAME/$(basename "$JSON_LOG")"

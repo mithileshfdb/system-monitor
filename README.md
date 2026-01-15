@@ -142,3 +142,26 @@ S3_JSON_URL=$(aws s3 presign "$S3_BUCKET/$HOSTNAME/$(basename "$JSON_LOG")" --ex
 
 Now email recipients can download directly without AWS access.
 ```
+
+## ✅ Option 1 (Recommended): --acl public-read during upload (This makes only the uploaded objects public, not the whole bucket.)
+
+```bash
+PREFIX="spikes"
+S3_BUCKET="s3://your-bucket-name/system-monitor/$(hostname)/"
+
+# Upload spike files with public read access
+aws s3 cp . "$S3_BUCKET" \
+  --recursive \
+  --exclude "*" \
+  --include "${PREFIX}*" \
+  --acl public-read
+
+# Verify upload before cleanup
+if aws s3 ls "$S3_BUCKET" | grep -q "${PREFIX}"; then
+  echo "Files verified in S3. Cleaning up local files..."
+  rm -f ${PREFIX}*.csv ${PREFIX}*.json
+else
+  echo "Verification failed. Cleanup skipped."
+fi
+
+```
