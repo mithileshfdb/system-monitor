@@ -180,3 +180,10 @@ Bash Condition Breakdown
 https://chatgpt.com/share/6968ca70-1380-8000-9368-3be606811049
 ```
 
+## Cron Expression Correction
+
+```bash
+Cron Expression Correction
+https://chatgpt.com/share/6968cd34-1898-8000-b6e7-e3d1f6485e5d
+```
+
