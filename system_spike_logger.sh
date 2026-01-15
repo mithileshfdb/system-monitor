@@ -123,7 +123,7 @@ aws s3 cp "$LOG_PATH" "$S3_BUCKET_PATH" \
 
 if [ $? -eq 0 ]; then
   echo "Upload successful. Cleaning up local files..."
-  sudo rm -f ${PREFIX}*.csv ${PREFIX}*.json
+  sudo rm -v ${PREFIX}*.csv ${PREFIX}*.json
 else
   echo "Upload failed. Cleanup skipped."
 fi
