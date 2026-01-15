@@ -110,11 +110,20 @@ aws s3 cp . "$S3_BUCKET_PATH" \
   --acl public-read
 
 # Verify upload before cleanup
-if aws s3 ls "$S3_BUCKET_PATH" | grep -q "${PREFIX}"; then
-  echo "Files verified in S3. Cleaning up local files..."
+# if aws s3 ls "$S3_BUCKET_PATH" | grep -q "${PREFIX}"; then
+#   echo "Files verified in S3. Cleaning up local files..."
+#   rm -f ${PREFIX}*.csv ${PREFIX}*.json
+# else
+#   echo "Verification failed. Cleanup skipped."
+# fi
+
+# Verify another way upload before cleanup
+
+if [ $? -eq 0 ]; then
+  echo "Upload successful. Cleaning up local files..."
   rm -f ${PREFIX}*.csv ${PREFIX}*.json
 else
-  echo "Verification failed. Cleanup skipped."
+  echo "Upload failed. Cleanup skipped."
 fi
 
 
