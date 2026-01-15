@@ -172,3 +172,11 @@ fi
 Please follow the below link or pdf documents
 https://chatgpt.com/share/69688dd8-e774-8000-ab0e-6c534790d75a
 ```
+
+## Bash Condition Breakdown
+
+```bash
+Bash Condition Breakdown
+https://chatgpt.com/share/6968ca70-1380-8000-9368-3be606811049
+```
+
