@@ -165,3 +165,12 @@ else
 fi
 
 ```
+
+## Without Kubernetes: Server log in the best UI
+
+```bash
+Please follow the below link or pdf documents
+https://chatgpt.com/share/69688dd8-e774-8000-ab0e-6c534790d75a
+```
+
+
