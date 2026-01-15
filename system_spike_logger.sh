@@ -121,7 +121,7 @@ aws s3 cp . "$S3_BUCKET_PATH" \
 
 if [ $? -eq 0 ]; then
   echo "Upload successful. Cleaning up local files..."
-  rm -f ${PREFIX}*.csv ${PREFIX}*.json
+  sudo rm -f ${PREFIX}*.csv ${PREFIX}*.json
 else
   echo "Upload failed. Cleanup skipped."
 fi
